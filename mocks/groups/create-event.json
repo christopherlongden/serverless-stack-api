@@ -1,0 +1,8 @@
+{
+    "body": "{\"name\":\"My Group 1\",\"isPublic\":true}",
+    "requestContext": {
+      "identity": {
+        "cognitoIdentityId": "USER-SUB-1234"
+      }
+    }
+  }
