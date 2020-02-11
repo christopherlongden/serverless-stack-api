@@ -48,12 +48,6 @@ provider:
         - "Fn::GetAtt": [ NotesTable, Arn ]
 
 functions:
-  # Defines an HTTP API endpoint that calls the main function in create.js
-  # - path: url path is /notes
-  # - method: POST request
-  # - cors: enabled CORS (Cross-Origin Resource Sharing) for browser cross
-  #     domain api call
-  # - authorizer: authenticate using the AWS IAM role
   createNote:
     handler: notes/create.main
     events:
@@ -73,9 +67,6 @@ functions:
           authorizer: aws_iam
 
   getNote:
-    # Defines an HTTP API endpoint that calls the main function in get.js
-    # - path: url path is /notes/{id}
-    # - method: GET request
     handler: notes/get.main
     events:
       - http:
@@ -83,10 +74,8 @@ functions:
           method: get
           cors: true
           authorizer: aws_iam
+
   listNotes:
-    # Defines an HTTP API endpoint that calls the main function in list.js
-    # - path: url path is /notes
-    # - method: GET request
     handler: notes/list.main
     events:
       - http:
@@ -94,6 +83,17 @@ functions:
           method: get
           cors: true
           authorizer: aws_iam
+  
+  listGroups:
+    handler: groups/list.main
+    events:
+      - http:
+          path: groups
+          method: get
+          cors: true
+          authorizer: aws_iam
+
+
   updateNote:
     # Defines an HTTP API endpoint that calls the main function in update.js
     # - path: url path is /notes/{id}
