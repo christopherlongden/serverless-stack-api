@@ -75,6 +75,15 @@ functions:
           cors: true
           authorizer: aws_iam
 
+  getGroup:
+    handler: groups/get.main
+    events:
+      - http:
+          path: groups/{id}
+          method: get
+          cors: true
+          authorizer: aws_iam
+
   listNotes:
     handler: notes/list.main
     events:
@@ -93,11 +102,7 @@ functions:
           cors: true
           authorizer: aws_iam
 
-
   updateNote:
-    # Defines an HTTP API endpoint that calls the main function in update.js
-    # - path: url path is /notes/{id}
-    # - method: PUT request
     handler: notes/update.main
     events:
       - http:
@@ -105,6 +110,16 @@ functions:
           method: put
           cors: true
           authorizer: aws_iam
+
+  updateGroup:
+    handler: groups/update.main
+    events:
+      - http:
+          path: groups/{id}
+          method: put
+          cors: true
+          authorizer: aws_iam
+
   deleteNote:
     handler: notes/delete.main
     events:
