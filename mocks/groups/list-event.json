@@ -2,7 +2,7 @@
     "body": "{\"isPublic\":true}",
     "requestContext": {
       "identity": {
-        "cognitoIdentityId": "USER-SUB-123"
+        "cognitoIdentityId": "USER-SUB-1234"
       }
     }
   }
