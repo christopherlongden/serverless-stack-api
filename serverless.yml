@@ -46,6 +46,7 @@ provider:
       # the specific table for the stage
       Resource:
         - "Fn::GetAtt": [ NotesTable, Arn ]
+        - "Fn::GetAtt": [ GroupsTable, Arn ]
 
 functions:
   createNote:
