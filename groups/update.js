@@ -9,9 +9,10 @@ export async function main(event, context) {
       userId: event.requestContext.identity.cognitoIdentityId,
       groupId: event.pathParameters.id
     },
-    UpdateExpression: "SET groupName = :groupName, attachment = :attachment",
+    UpdateExpression: "SET groupName = :groupName, description = :description, isPublic = :isPublic",
     ExpressionAttributeValues: {
-      ":attachment": data.attachment || null,
+      ":isPublic": data.isPublic,
+      ":description": data.description || null,
       ":groupName": data.groupName || null
     },
     ReturnValues: "ALL_NEW"
