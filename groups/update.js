@@ -9,14 +9,11 @@ export async function main(event, context) {
       userId: event.requestContext.identity.cognitoIdentityId,
       groupId: event.pathParameters.id
     },
-    UpdateExpression: "SET groupName = :groupName, isPublic = :isPublic",
+    UpdateExpression: "SET groupName = :groupName, attachment = :attachment",
     ExpressionAttributeValues: {
-      ":groupName": data.groupName || null,
-      ":isPublic": data.isPublic
+      ":attachment": data.attachment || null,
+      ":groupName": data.groupName || null
     },
-    // 'ReturnValues' specifies if and how to return the item's attributes,
-    // where ALL_NEW returns all attributes of the item after the update; you
-    // can inspect 'result' below to see how it works with different settings
     ReturnValues: "ALL_NEW"
   };
 

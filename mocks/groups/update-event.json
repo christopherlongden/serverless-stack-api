@@ -1,7 +1,7 @@
 {
-    "body": "{\"groupName\":\"boom boom\",\"isPublic\":true}",
+    "body": "{\"groupName\":\"boom boom\",\"attachment\":\"hello_edit.jpg\"}",
     "pathParameters": {
-      "id": "2cb32c60-4d00-11ea-b67c-c7ffbe1a14c6"
+      "id": "ed647980-4dac-11ea-a990-ebfe7122616f"
     },
     "requestContext": {
       "identity": {
