@@ -1,5 +1,5 @@
 {
-    "body": "{\"groupName\":\"My Group 123\"}",
+    "body": "{\"groupName\":\"My Group 123\",\"attachment\":\"hello.jpg\"}",
     "requestContext": {
       "identity": {
         "cognitoIdentityId": "USER-SUB-1234"
