@@ -1,5 +1,5 @@
 {
-    "body": "{\"content\":\"hello world\",\"attachment\":\"hello.jpg\"}",
+    "body": "{\"content\":\"hello world\",\"attachment\":\"hello.jpg\",\"groupId\":\"789ae620-4ea1-11ea-bb13-d5a19be35ebc\"}",
     "requestContext": {
       "identity": {
         "cognitoIdentityId": "USER-SUB-1234"
