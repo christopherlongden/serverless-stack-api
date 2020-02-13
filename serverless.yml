@@ -14,7 +14,8 @@ custom:
   # commands. Or fallsback to what we have set in the provider section.
   stage: ${opt:stage, self:provider.stage}
   # Set the table name here so we can use it while testing locally
-  tableName: ${self:custom.stage}-notes
+  notesTableName: ${self:custom.stage}-notes
+  groupsTableName: ${self:custom.stage}-groups
   
 provider:
   name: aws
@@ -25,7 +26,8 @@ provider:
   # These environment variables are made available to our functions
   # under process.env.
   environment:
-    tableName: ${self:custom.tableName}
+    notesTableName: ${self:custom.notesTableName}
+    groupsTableName: ${self:custom.groupsTableName}
     stripeSecretKey: ${env:STRIPE_SECRET_KEY}
 
   # 'iamRoleStatements' defines the permission policy for the Lambda function.
@@ -44,71 +46,104 @@ provider:
       # the specific table for the stage
       Resource:
         - "Fn::GetAtt": [ NotesTable, Arn ]
+        - "Fn::GetAtt": [ GroupsTable, Arn ]
 
 functions:
-  # Defines an HTTP API endpoint that calls the main function in create.js
-  # - path: url path is /notes
-  # - method: POST request
-  # - cors: enabled CORS (Cross-Origin Resource Sharing) for browser cross
-  #     domain api call
-  # - authorizer: authenticate using the AWS IAM role
-  create:
-    handler: create.main
+  createNote:
+    handler: notes/create.main
     events:
       - http:
           path: notes
           method: post
           cors: true
           authorizer: aws_iam
-  get:
-    # Defines an HTTP API endpoint that calls the main function in get.js
-    # - path: url path is /notes/{id}
-    # - method: GET request
-    handler: get.main
+
+  createGroup:
+    handler: groups/create.main
+    events:
+      - http:
+          path: groups
+          method: post
+          cors: true
+          authorizer: aws_iam
+
+  getNote:
+    handler: notes/get.main
     events:
       - http:
           path: notes/{id}
           method: get
           cors: true
           authorizer: aws_iam
-  list:
-    # Defines an HTTP API endpoint that calls the main function in list.js
-    # - path: url path is /notes
-    # - method: GET request
-    handler: list.main
+
+  getGroup:
+    handler: groups/get.main
+    events:
+      - http:
+          path: groups/{id}
+          method: get
+          cors: true
+          authorizer: aws_iam
+
+  listNotes:
+    handler: notes/list.main
     events:
       - http:
           path: notes
           method: get
           cors: true
           authorizer: aws_iam
-  update:
-    # Defines an HTTP API endpoint that calls the main function in update.js
-    # - path: url path is /notes/{id}
-    # - method: PUT request
-    handler: update.main
+  
+  listGroups:
+    handler: groups/list.main
+    events:
+      - http:
+          path: groups
+          method: get
+          cors: true
+          authorizer: aws_iam
+
+  updateNote:
+    handler: notes/update.main
     events:
       - http:
           path: notes/{id}
           method: put
           cors: true
           authorizer: aws_iam
-  delete:
-    # Defines an HTTP API endpoint that calls the main function in delete.js
-    # - path: url path is /notes/{id}
-    # - method: DELETE request
-    handler: delete.main
+
+  updateGroup:
+    handler: groups/update.main
+    events:
+      - http:
+          path: groups/{id}
+          method: put
+          cors: true
+          authorizer: aws_iam
+
+  deleteNote:
+    handler: notes/delete.main
     events:
       - http:
           path: notes/{id}
           method: delete
           cors: true
           authorizer: aws_iam
+
+  deleteGroup:
+    handler: groups/delete.main
+    events:
+      - http:
+          path: groups/{id}
+          method: delete
+          cors: true
+          authorizer: aws_iam
+
   billing:
     # Defines an HTTP API endpoint that calls the main function in billing.js
     # - path: url path is /billing
     # - method: POST request
-    handler: billing.main
+    handler: billing/billing.main
     events:
       - http:
           path: billing
