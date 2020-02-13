@@ -10,7 +10,7 @@ export async function main(event, context) {
       userId: event.requestContext.identity.cognitoIdentityId,
       groupId: uuid.v1(),
       groupName: data.groupName,
-      description: data.description,
+      description: data.description || null,
       isPublic: data.isPublic,
       createdAt: Date.now()
     }

@@ -12,8 +12,8 @@ export async function main(event, context) {
     UpdateExpression: "SET groupName = :groupName, description = :description, isPublic = :isPublic",
     ExpressionAttributeValues: {
       ":isPublic": data.isPublic,
-      ":description": data.description || null,
-      ":groupName": data.groupName || null
+      ":groupName": data.groupName,
+      ":description": data.description || null
     },
     ReturnValues: "ALL_NEW"
   };
